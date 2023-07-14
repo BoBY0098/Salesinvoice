@@ -2,6 +2,9 @@ package com.amirhossein.salesinvoice.services.impl;
 
 import com.amirhossein.salesinvoice.converters.invoice.InvoiceToRes;
 import com.amirhossein.salesinvoice.converters.invoice.ReqToInvoice;
+import com.amirhossein.salesinvoice.converters.product.ReqToProduct;
+import com.amirhossein.salesinvoice.converters.seller.ReqToSeller;
+import com.amirhossein.salesinvoice.converters.shopper.ReqToShopper;
 import com.amirhossein.salesinvoice.models.invoice.Invoice;
 import com.amirhossein.salesinvoice.models.invoice.InvoiceReq;
 import com.amirhossein.salesinvoice.models.invoice.InvoiceRes;
@@ -25,15 +28,21 @@ public class InvoiceServiceImpl implements InvoiceService {
     private ShopperRepository shopperRepository;
     private InvoiceToRes invoiceToRes;
     private ReqToInvoice reqToInvoice;
+    private ReqToProduct reqToProduct;
+    private ReqToSeller reqToSeller;
+    private ReqToShopper reqToShopper;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, ProductRepository productRepository, SellerRepository sellerRepository, ShopperRepository shopperRepository, InvoiceToRes invoiceToRes, ReqToInvoice reqToInvoice) {
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, ProductRepository productRepository, SellerRepository sellerRepository, ShopperRepository shopperRepository, InvoiceToRes invoiceToRes, ReqToInvoice reqToInvoice, ReqToProduct reqToProduct, ReqToSeller reqToSeller, ReqToShopper reqToShopper) {
         this.invoiceRepository = invoiceRepository;
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
         this.shopperRepository = shopperRepository;
         this.invoiceToRes = invoiceToRes;
         this.reqToInvoice = reqToInvoice;
+        this.reqToProduct = reqToProduct;
+        this.reqToSeller = reqToSeller;
+        this.reqToShopper = reqToShopper;
     }
 
     @Override
@@ -54,6 +63,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     public InvoiceRes createInvoice(InvoiceReq invoiceReq) {
 
         Invoice invoice = reqToInvoice.convert(invoiceReq);
+
+        for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+            invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+        }
+
+        invoice.setSeller(sellerRepository.save(reqToSeller.convert(invoiceReq.getSellerReq())));
+
+        invoice.setShopper(shopperRepository.save(reqToShopper.convert(invoiceReq.getShopperReq())));
 
         invoiceRepository.save(invoice);
 
