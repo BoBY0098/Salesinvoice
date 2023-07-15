@@ -39,8 +39,6 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
             "/**/register",
             "/**/otpCode",
             "/**/refreshtoken",
-
-
     };
     private final String[] lockedRoutes = new String[]{
             /* "/" + PANEL + "/admins",
