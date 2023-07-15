@@ -5,11 +5,9 @@ import com.amirhossein.salesinvoice.models.product.Product;
 import com.amirhossein.salesinvoice.models.seller.Seller;
 import com.amirhossein.salesinvoice.models.shopper.Shopper;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +19,8 @@ public class Invoice extends AuditModel {
 
     private Date date;
 
-    private Long invoiceNum;
+    @Column(length = 6)
+    private String invoiceNum;
 
     @OneToOne()
     private Seller seller;

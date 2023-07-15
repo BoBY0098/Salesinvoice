@@ -1,7 +1,7 @@
 package com.amirhossein.salesinvoice.services.impl;
 
+import com.amirhossein.salesinvoice.components.NumberGenerator;
 import com.amirhossein.salesinvoice.converters.invoice.InvoiceToRes;
-import com.amirhossein.salesinvoice.converters.invoice.ReqToInvoice;
 import com.amirhossein.salesinvoice.converters.product.ReqToProduct;
 import com.amirhossein.salesinvoice.converters.seller.ReqToSeller;
 import com.amirhossein.salesinvoice.converters.shopper.ReqToShopper;
@@ -27,19 +27,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     private SellerRepository sellerRepository;
     private ShopperRepository shopperRepository;
     private InvoiceToRes invoiceToRes;
-    private ReqToInvoice reqToInvoice;
     private ReqToProduct reqToProduct;
     private ReqToSeller reqToSeller;
     private ReqToShopper reqToShopper;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, ProductRepository productRepository, SellerRepository sellerRepository, ShopperRepository shopperRepository, InvoiceToRes invoiceToRes, ReqToInvoice reqToInvoice, ReqToProduct reqToProduct, ReqToSeller reqToSeller, ReqToShopper reqToShopper) {
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, ProductRepository productRepository, SellerRepository sellerRepository, ShopperRepository shopperRepository, InvoiceToRes invoiceToRes, ReqToProduct reqToProduct, ReqToSeller reqToSeller, ReqToShopper reqToShopper) {
         this.invoiceRepository = invoiceRepository;
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
         this.shopperRepository = shopperRepository;
         this.invoiceToRes = invoiceToRes;
-        this.reqToInvoice = reqToInvoice;
         this.reqToProduct = reqToProduct;
         this.reqToSeller = reqToSeller;
         this.reqToShopper = reqToShopper;
@@ -60,22 +58,49 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceRes createInvoice(InvoiceReq invoiceReq) {
+    public InvoiceRes createInvoice(InvoiceReq invoiceReq , Boolean generateNum , String invoiceNum) {
 
-        Invoice invoice = reqToInvoice.convert(invoiceReq);
+        if (generateNum){
 
-        for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
-            invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+            Invoice invoice = new Invoice();
+
+            invoice.setDate(invoiceReq.getDate());
+            invoice.setInvoiceNum(NumberGenerator.getRandomNumberString());
+
+            for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+                invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+            }
+
+            invoice.setSeller(sellerRepository.save(reqToSeller.convert(invoiceReq.getSellerReq())));
+
+            invoice.setShopper(shopperRepository.save(reqToShopper.convert(invoiceReq.getShopperReq())));
+
+            invoiceRepository.save(invoice);
+
+            InvoiceRes res = invoiceToRes.convert(invoice);
+
+            return res;
+
+        } else {
+
+            Invoice invoice = new Invoice();
+
+            invoice.setDate(invoiceReq.getDate());
+            invoice.setInvoiceNum(invoiceNum);
+
+            for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+                invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+            }
+
+            invoice.setSeller(sellerRepository.save(reqToSeller.convert(invoiceReq.getSellerReq())));
+
+            invoice.setShopper(shopperRepository.save(reqToShopper.convert(invoiceReq.getShopperReq())));
+
+            invoiceRepository.save(invoice);
+
+            InvoiceRes res = invoiceToRes.convert(invoice);
+
+            return res;
         }
-
-        invoice.setSeller(sellerRepository.save(reqToSeller.convert(invoiceReq.getSellerReq())));
-
-        invoice.setShopper(shopperRepository.save(reqToShopper.convert(invoiceReq.getShopperReq())));
-
-        invoiceRepository.save(invoice);
-
-        InvoiceRes res = invoiceToRes.convert(invoice);
-
-        return res;
     }
 }

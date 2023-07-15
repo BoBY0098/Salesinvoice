@@ -9,5 +9,5 @@ public interface InvoiceService {
 
     List<InvoiceRes> getAllInvoices();
 
-    InvoiceRes createInvoice(InvoiceReq invoiceReq);
+    InvoiceRes createInvoice(InvoiceReq invoiceReq , Boolean generateNum , String invoiceNum);
 }

@@ -16,7 +16,7 @@ public class InvoiceRes extends AuditModelRes {
 
     private Date date;
 
-    private Long invoiceNum;
+    private String invoiceNum;
 
     private SellerRes seller;
 

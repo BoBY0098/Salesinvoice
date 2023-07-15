@@ -16,8 +16,6 @@ public class InvoiceReq {
 
     private Date date;
 
-    private Long invoiceNum;
-
     private SellerReq sellerReq;
 
     private ShopperReq shopperReq;

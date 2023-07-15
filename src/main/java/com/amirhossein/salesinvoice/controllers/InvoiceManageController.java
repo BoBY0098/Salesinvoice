@@ -9,6 +9,9 @@ import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Max;
+
 @RestController
 @Api(tags = "manage-invoices")
 @RequestMapping("/manage/invoices")
@@ -27,8 +30,8 @@ public class InvoiceManageController {
     }
 
     @PostMapping()
-    @ApiOperation(value = "Create New a Invoice" , notes = "Create New a Invoice" , response = InvoiceRes.class , authorizations = {@Authorization(value = "jwtToken")})
-    public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq){
-        return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq));
+    @ApiOperation(value = "Create New a Invoice" , notes = "If you want to Generate Random Number for InvoiceNum , Please Select True for generateNum and Type in box 6 Digit Number" , response = InvoiceRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq , @RequestParam() Boolean generateNum , @RequestParam(value = "6 Digit Number" , required = false) String invoiceNum){
+        return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq , generateNum , invoiceNum));
     }
 }
