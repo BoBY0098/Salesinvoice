@@ -20,7 +20,7 @@ public class InvoiceManageController {
     }
 
     @GetMapping()
-    @ApiOperation(value = "Get All Invoices" , notes = "Get All Invoices" , response = InvoiceRes.class)
+    @ApiOperation(value = "Get All Invoices" , notes = "Get All Invoices" , response = InvoiceRes.class , responseContainer = "List")
     public ResponseEntity<?> getAllInvoices(){
         return ResponseEntity.ok(invoiceService.getAllInvoices());
     }
