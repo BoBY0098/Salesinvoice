@@ -30,8 +30,22 @@ public class SpringFoxConfiguration {
                 .apis(RequestHandlerSelectors.basePackage("com.amirhossein.salesinvoice"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo());
+                .apiInfo(apiInfo())
+                .securitySchemes(jwtScheme());
+
+
         //.additionalModels(typeResolver.resolve());
+    }
+
+
+    private List<SecurityScheme> jwtScheme() {
+        List<SecurityScheme> schemeList = new ArrayList<>();
+        schemeList.add(apiKey());
+        return schemeList;
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey("jwtToken", "Authorization", "header");
     }
 
     private ApiInfo apiInfo() {
