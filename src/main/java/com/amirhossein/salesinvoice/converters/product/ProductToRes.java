@@ -17,7 +17,6 @@ public class ProductToRes implements Converter<Product , ProductRes> {
 
         output.setName(input.getName());
         output.setPrice(input.getPrice());
-        output.setTotalPrice(input.getTotalPrice());
 
         return output;
     }

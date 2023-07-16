@@ -13,8 +13,7 @@ public class ReqToShopper implements Converter<ShopperReq , Shopper> {
 
         Shopper output = new Shopper();
 
-        output.setName(input.getName());
-        output.setAddress(input.getAddress());
+        output.setCompanyName(input.getCompanyName());
         output.setPhoneNumber(input.getPhoneNumber());
 
         return output;

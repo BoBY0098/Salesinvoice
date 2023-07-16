@@ -15,7 +15,6 @@ public class ReqToProduct implements Converter<ProductReq, Product> {
 
         output.setName(input.getName());
         output.setPrice(input.getPrice());
-        output.setTotalPrice(input.getTotalPrice());
 
         return output;
     }

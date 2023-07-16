@@ -15,8 +15,7 @@ public class ShopperToRes implements Converter<Shopper , ShopperRes> {
 
         output.setId(input.getId());
 
-        output.setName(input.getName());
-        output.setAddress(input.getAddress());
+        output.setCompanyName(input.getCompanyName());
         output.setPhoneNumber(input.getPhoneNumber());
 
         return output;
