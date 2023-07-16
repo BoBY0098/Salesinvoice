@@ -13,9 +13,7 @@ import javax.persistence.Table;
 @Data
 public class Shopper extends AuditModel {
 
-    private String name;
-
-    private String address;
+    private String companyName;
 
     private String phoneNumber;
 }

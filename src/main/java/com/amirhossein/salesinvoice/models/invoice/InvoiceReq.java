@@ -10,15 +10,20 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class InvoiceReq {
 
     private Date date;
 
-    private SellerReq sellerReq;
+    private UUID sellerId;
 
-    private ShopperReq shopperReq;
+    private UUID shopperId;
+
+    private UUID productId;
+
+    private Boolean generateNum;
 
     List<ProductReq> productReqs = new ArrayList<>();
 }

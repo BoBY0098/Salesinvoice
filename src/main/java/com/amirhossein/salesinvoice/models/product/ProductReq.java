@@ -8,6 +8,4 @@ public class ProductReq {
     private String name;
 
     private Long price;
-
-    private Long totalPrice;
 }

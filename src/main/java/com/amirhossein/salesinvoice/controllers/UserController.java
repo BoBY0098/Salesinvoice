@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@Api(tags = "manage-users")
-@RequestMapping("/manage/users")
-public class UserManageController {
+@Api(tags = "users")
+@RequestMapping("/users")
+public class UserController {
 
     private UserService userService;
 
     @Autowired
-    public UserManageController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

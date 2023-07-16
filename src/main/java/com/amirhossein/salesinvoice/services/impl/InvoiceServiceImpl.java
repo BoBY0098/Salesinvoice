@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -58,22 +59,29 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceRes createInvoice(InvoiceReq invoiceReq , Boolean generateNum , String invoiceNum) {
+    public InvoiceRes createInvoice(InvoiceReq invoiceReq, String invoiceNum) {
 
-        if (generateNum){
+        if (invoiceReq.getGenerateNum()) {
 
             Invoice invoice = new Invoice();
 
             invoice.setDate(invoiceReq.getDate());
             invoice.setInvoiceNum(NumberGenerator.getRandomNumberString());
 
-            for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
-                invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+            if (invoiceReq.getProductId() != null) {
+                invoice.getProducts().add(productRepository.findById(invoiceReq.getProductId()).get());
+
+            } else {
+                for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+                    invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+
+                }
+
             }
 
-            invoice.setSeller(sellerRepository.save(reqToSeller.convert(invoiceReq.getSellerReq())));
+            invoice.setSeller(sellerRepository.findById(invoiceReq.getSellerId()).get());
 
-            invoice.setShopper(shopperRepository.save(reqToShopper.convert(invoiceReq.getShopperReq())));
+            invoice.setShopper(shopperRepository.findById(invoiceReq.getShopperId()).get());
 
             invoiceRepository.save(invoice);
 
@@ -88,13 +96,20 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoice.setDate(invoiceReq.getDate());
             invoice.setInvoiceNum(invoiceNum);
 
-            for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
-                invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+            if (invoiceReq.getProductId() != null) {
+                invoice.getProducts().add(productRepository.findById(invoiceReq.getProductId()).get());
+
+            } else {
+                for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+                    invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+
+                }
+
             }
 
-            invoice.setSeller(sellerRepository.save(reqToSeller.convert(invoiceReq.getSellerReq())));
+            invoice.setSeller(sellerRepository.findById(invoiceReq.getSellerId()).get());
 
-            invoice.setShopper(shopperRepository.save(reqToShopper.convert(invoiceReq.getShopperReq())));
+            invoice.setShopper(shopperRepository.findById(invoiceReq.getShopperId()).get());
 
             invoiceRepository.save(invoice);
 

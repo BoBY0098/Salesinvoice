@@ -9,17 +9,14 @@ import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Max;
-
 @RestController
-@Api(tags = "manage-invoices")
-@RequestMapping("/manage/invoices")
-public class InvoiceManageController {
+@Api(tags = "invoices")
+@RequestMapping("/invoices")
+public class InvoiceController {
 
     private InvoiceService invoiceService;
 
-    public InvoiceManageController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
 
@@ -31,7 +28,7 @@ public class InvoiceManageController {
 
     @PostMapping()
     @ApiOperation(value = "Create New a Invoice" , notes = "If you want to Generate Random Number for InvoiceNum , Please Select True for generateNum and Type in box 6 Digit Number" , response = InvoiceRes.class , authorizations = {@Authorization(value = "jwtToken")})
-    public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq , @RequestParam() Boolean generateNum , @RequestParam(value = "6 Digit Number" , required = false) String invoiceNum){
-        return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq , generateNum , invoiceNum));
+    public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq /*, @RequestParam() Boolean generateNum*/ , @RequestParam(/*name = "6 Digit Number" , */required = false) String invoiceNum /*, @RequestParam(required = false) UUID productId*/){
+        return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq, invoiceNum));
     }
 }

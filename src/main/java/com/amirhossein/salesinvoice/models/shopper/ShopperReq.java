@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public class ShopperReq {
 
-    private String name;
-
-    private String address;
+    private String companyName;
 
     private String phoneNumber;
 }

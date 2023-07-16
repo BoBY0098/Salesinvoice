@@ -9,6 +9,4 @@ public class ProductRes extends AuditModelRes {
     private String name;
 
     private Long price;
-
-    private Long totalPrice;
 }

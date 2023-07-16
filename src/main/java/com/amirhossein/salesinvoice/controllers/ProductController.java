@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@Api(tags = "manage-products")
-@RequestMapping("/manage/products")
-public class ProductManageController {
+@Api(tags = "products")
+@RequestMapping("/products")
+public class ProductController {
 
     private ProductService productService;
 
     @Autowired
-    public ProductManageController(ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 

@@ -17,8 +17,6 @@ public class Product extends AuditModel {
 
     private Long price;
 
-    private Long totalPrice;
-
     @ManyToOne
     private Invoice invoice;
 }
