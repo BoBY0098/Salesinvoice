@@ -5,8 +5,10 @@ import com.amirhossein.salesinvoice.models.invoice.Invoice;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -17,6 +19,6 @@ public class Product extends AuditModel {
 
     private Long price;
 
-    @ManyToOne
-    private Invoice invoice;
+    @ManyToMany
+    List<Invoice> invoice;
 }

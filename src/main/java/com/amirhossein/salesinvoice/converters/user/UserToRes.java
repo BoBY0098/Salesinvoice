@@ -18,6 +18,8 @@ public class UserToRes implements Converter<User , UserRes> {
         output.setUserName(input.getUserName());
         output.setFirstName(input.getFirstName());
         output.setLastName(input.getLastName());
+        output.setPhoneNumber(input.getPhoneNumber());
+
         output.setToken(null);
         output.setRefreshToken(null);
 
