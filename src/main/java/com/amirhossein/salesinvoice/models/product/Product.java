@@ -2,12 +2,10 @@ package com.amirhossein.salesinvoice.models.product;
 
 import com.amirhossein.salesinvoice.models.audit.AuditModel;
 import com.amirhossein.salesinvoice.models.invoice.Invoice;
+import com.amirhossein.salesinvoice.models.joineTable.ProductCount;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -19,6 +17,6 @@ public class Product extends AuditModel {
 
     private Long price;
 
-    @ManyToMany
-    List<Invoice> invoice;
+    @OneToMany(mappedBy = "product")
+    List<ProductCount> counts;
 }
