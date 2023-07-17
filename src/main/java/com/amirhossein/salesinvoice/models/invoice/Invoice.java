@@ -28,6 +28,6 @@ public class Invoice extends AuditModel {
     @OneToOne()
     private Shopper shopper;
 
-    @OneToMany()
+    @ManyToMany()
     List<Product> products = new ArrayList<>();
 }
