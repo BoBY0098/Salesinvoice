@@ -13,17 +13,17 @@ import javax.persistence.*;
 public class ProductCount {
 
     @EmbeddedId
-    ProductCountKey id;
+    private ProductCountKey compositeKey;
 
     @ManyToOne
     @MapsId("invoiceId")
     @JoinColumn(name = "invoice_id")
-    Invoice invoice;
+    private Invoice invoice;
 
     @ManyToOne
     @MapsId("productId")
     @JoinColumn(name = "product_id")
-    Product product;
+    private Product product;
 
-    Integer count;
+    private Integer count;
 }

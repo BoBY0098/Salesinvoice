@@ -1,5 +1,6 @@
 package com.amirhossein.salesinvoice.models.invoice;
 
+import com.amirhossein.salesinvoice.models.joineTable.ProductCount;
 import com.amirhossein.salesinvoice.models.product.ProductReq;
 import com.amirhossein.salesinvoice.models.seller.Seller;
 import com.amirhossein.salesinvoice.models.seller.SellerReq;
@@ -26,4 +27,6 @@ public class InvoiceReq {
     private Boolean generateNum;
 
     List<ProductReq> productReqs = new ArrayList<>();
+
+    List<ProductCount> counts = new ArrayList<>();
 }

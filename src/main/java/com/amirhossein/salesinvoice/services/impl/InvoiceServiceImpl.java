@@ -61,7 +61,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceRes createInvoice(InvoiceReq invoiceReq, String invoiceNum) {
 
-        if (invoiceReq.getGenerateNum()) {
+        /*if (invoiceReq.getGenerateNum()) {
 
             Invoice invoice = new Invoice();
 
@@ -69,7 +69,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoice.setInvoiceNum(NumberGenerator.getRandomNumberString());
 
             if (invoiceReq.getProductId() != null) {
-                invoice.getProducts().add(productRepository.findById(invoiceReq.getProductId()).get());
+                invoice.getCounts().add(invoiceReq.getCounts().get()).get();
 
             } else {
                 for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
@@ -116,6 +116,12 @@ public class InvoiceServiceImpl implements InvoiceService {
             InvoiceRes res = invoiceToRes.convert(invoice);
 
             return res;
-        }
+        }*/
+
+        return null;
     }
 }
+
+
+
+

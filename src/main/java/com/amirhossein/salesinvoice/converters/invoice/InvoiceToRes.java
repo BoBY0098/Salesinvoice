@@ -33,11 +33,12 @@ public class InvoiceToRes implements Converter<Invoice , InvoiceRes> {
         output.setDate(input.getDate());
         output.setInvoiceNum(input.getInvoiceNum());
 
-        if(!input.getProducts().isEmpty()) {
-            for (int i = 0; i < input.getProducts().size(); i++) {
-                output.getProducts().add(productToRes.convert(input.getProducts().get(i)));
+        /*if(!input.getCounts().get(0).g.isEmpty()) {
+            for (int i = 0; i < input.getCounts().size(); i++) {
+                output.getCounts().add(input.getCounts().get(i));
             }
-        }
+        }*/
+
         output.setSeller(sellerToRes.convert(input.getSeller()));
         output.setShopper(shopperToRes.convert(input.getShopper()));
 

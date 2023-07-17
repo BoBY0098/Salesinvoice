@@ -1,6 +1,7 @@
 package com.amirhossein.salesinvoice.models.invoice;
 
 import com.amirhossein.salesinvoice.models.audit.AuditModelRes;
+import com.amirhossein.salesinvoice.models.joineTable.ProductCount;
 import com.amirhossein.salesinvoice.models.product.Product;
 import com.amirhossein.salesinvoice.models.product.ProductRes;
 import com.amirhossein.salesinvoice.models.seller.SellerRes;
@@ -22,5 +23,5 @@ public class InvoiceRes extends AuditModelRes {
 
     private ShopperRes shopper;
 
-    List<ProductRes> products = new ArrayList<>();
+    List<ProductCount> counts = new ArrayList<>();
 }
