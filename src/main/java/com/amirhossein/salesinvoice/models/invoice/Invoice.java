@@ -21,7 +21,7 @@ public class Invoice extends AuditModel {
     private Date date;
 
     @Column(length = 6)
-    private String invoiceNum;
+    private String number;
 
     @OneToOne()
     private Seller seller;
@@ -30,5 +30,5 @@ public class Invoice extends AuditModel {
     private Shopper shopper;
 
     @OneToMany(mappedBy = "invoice")
-    List<ProductCount> counts = new ArrayList<>();
+    private List<ProductCount> counts = new ArrayList<>();
 }

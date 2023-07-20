@@ -28,7 +28,7 @@ public class InvoiceController {
 
     @PostMapping()
     @ApiOperation(value = "Create New a Invoice" , notes = "If you want to Generate Random Number for InvoiceNum , Please Select True for generateNum and Type in box 6 Digit Number" , response = InvoiceRes.class , authorizations = {@Authorization(value = "jwtToken")})
-    public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq /*, @RequestParam() Boolean generateNum*/ , @RequestParam(/*name = "6 Digit Number" , */required = false) String invoiceNum /*, @RequestParam(required = false) UUID productId*/){
-        return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq, invoiceNum));
+    public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq){
+        return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq));
     }
 }

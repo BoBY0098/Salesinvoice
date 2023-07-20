@@ -3,15 +3,14 @@ package com.amirhossein.salesinvoice.models.product;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
-public class ProductReq {
+public class ProductCountReq {
 
     @ApiModelProperty(required = true)
-    private String name;
+    private UUID productId;
 
     @ApiModelProperty(required = true)
-    private Long price;
-
-    @ApiModelProperty(notes = "Only if sent as new product in invoice create")
-    private Integer invoiceCount;
+    private Integer count;
 }

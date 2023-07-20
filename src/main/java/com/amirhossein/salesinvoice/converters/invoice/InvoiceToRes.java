@@ -10,7 +10,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InvoiceToRes implements Converter<Invoice , InvoiceRes> {
+public class InvoiceToRes implements Converter<Invoice, InvoiceRes> {
 
     private ProductToRes productToRes;
     private SellerToRes sellerToRes;
@@ -33,11 +33,9 @@ public class InvoiceToRes implements Converter<Invoice , InvoiceRes> {
         output.setDate(input.getDate());
         output.setInvoiceNum(input.getInvoiceNum());
 
-        /*if(!input.getCounts().get(0).g.isEmpty()) {
-            for (int i = 0; i < input.getCounts().size(); i++) {
-                output.getCounts().add(input.getCounts().get(i));
-            }
-        }*/
+        for (int i = 0; i < input.getCounts().size(); i++) {
+            output.getCounts().add(input.getCounts().get(i));
+        }
 
         output.setSeller(sellerToRes.convert(input.getSeller()));
         output.setShopper(shopperToRes.convert(input.getShopper()));

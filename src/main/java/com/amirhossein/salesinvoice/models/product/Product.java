@@ -18,5 +18,5 @@ public class Product extends AuditModel {
     private Long price;
 
     @OneToMany(mappedBy = "product")
-    List<ProductCount> counts;
+    private List<ProductCount> counts;
 }

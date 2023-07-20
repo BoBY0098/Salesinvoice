@@ -1,11 +1,8 @@
 package com.amirhossein.salesinvoice.models.invoice;
 
-import com.amirhossein.salesinvoice.models.joineTable.ProductCount;
+import com.amirhossein.salesinvoice.models.product.ProductCountReq;
 import com.amirhossein.salesinvoice.models.product.ProductReq;
-import com.amirhossein.salesinvoice.models.seller.Seller;
-import com.amirhossein.salesinvoice.models.seller.SellerReq;
-import com.amirhossein.salesinvoice.models.shopper.Shopper;
-import com.amirhossein.salesinvoice.models.shopper.ShopperReq;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -16,17 +13,21 @@ import java.util.UUID;
 @Data
 public class InvoiceReq {
 
+    @ApiModelProperty(notes = "If empty or null it will generate")
+    private String number;
+
+    @ApiModelProperty(required = true)
     private Date date;
 
+    @ApiModelProperty(required = true)
     private UUID sellerId;
 
+    @ApiModelProperty(required = true)
     private UUID shopperId;
 
-    private UUID productId;
+    @ApiModelProperty(notes = "If empty you must fill new product(s)")
+    private List<ProductCountReq> existProducts;
 
-    private Boolean generateNum;
-
-    List<ProductReq> productReqs = new ArrayList<>();
-
-    List<ProductCount> counts = new ArrayList<>();
+    @ApiModelProperty(notes = "If empty you must fill exist product(s)")
+    private List<ProductReq> newProducts = new ArrayList<>();
 }

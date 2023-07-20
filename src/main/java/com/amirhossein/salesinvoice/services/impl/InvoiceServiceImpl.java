@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -59,16 +58,23 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceRes createInvoice(InvoiceReq invoiceReq, String invoiceNum) {
+    public InvoiceRes createInvoice(InvoiceReq invoiceReq) {
+        // check and set invoice number
+        if (invoiceReq.getNumber() == null || invoiceReq.getNumber().equals(""))
+            invoiceReq.setNumber(NumberGenerator.getRandomNumberString());
 
-        /*if (invoiceReq.getGenerateNum()) {
+        Invoice newInvoice = new Invoice();
+
+
+
+        if (invoiceReq.getGenerateNum()) {
 
             Invoice invoice = new Invoice();
 
             invoice.setDate(invoiceReq.getDate());
-            invoice.setInvoiceNum(NumberGenerator.getRandomNumberString());
+            invoice.setInvoiceNum();
 
-            if (invoiceReq.getProductId() != null) {
+            /*if (invoiceReq.getProductId() != null) {
                 invoice.getCounts().add(invoiceReq.getCounts().get()).get();
 
             } else {
@@ -76,51 +82,56 @@ public class InvoiceServiceImpl implements InvoiceService {
                     invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
 
                 }
+            }*/
 
-            }
-
-            invoice.setSeller(sellerRepository.findById(invoiceReq.getSellerId()).get());
-
-            invoice.setShopper(shopperRepository.findById(invoiceReq.getShopperId()).get());
-
-            invoiceRepository.save(invoice);
-
-            InvoiceRes res = invoiceToRes.convert(invoice);
-
-            return res;
-
-        } else {
-
-            Invoice invoice = new Invoice();
-
-            invoice.setDate(invoiceReq.getDate());
-            invoice.setInvoiceNum(invoiceNum);
-
-            if (invoiceReq.getProductId() != null) {
-                invoice.getProducts().add(productRepository.findById(invoiceReq.getProductId()).get());
-
-            } else {
-                for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
-                    invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+            for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+                if (invoiceReq.getProductId() != null) {
+                    invoice.getCounts().add();
 
                 }
 
+                invoice.setSeller(sellerRepository.findById(invoiceReq.getSellerId()).get());
+
+                invoice.setShopper(shopperRepository.findById(invoiceReq.getShopperId()).get());
+
+                invoiceRepository.save(invoice);
+
+                InvoiceRes res = invoiceToRes.convert(invoice);
+
+                return res;
+
+            } else{
+
+                Invoice invoice = new Invoice();
+
+                invoice.setDate(invoiceReq.getDate());
+                invoice.setInvoiceNum(invoiceNum);
+
+                if (invoiceReq.getProductId() != null) {
+                    invoice.getProducts().add(productRepository.findById(invoiceReq.getProductId()).get());
+
+                } else {
+                    for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
+                        invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
+
+                    }
+
+                }
+
+                invoice.setSeller(sellerRepository.findById(invoiceReq.getSellerId()).get());
+
+                invoice.setShopper(shopperRepository.findById(invoiceReq.getShopperId()).get());
+
+                invoiceRepository.save(invoice);
+
+                InvoiceRes res = invoiceToRes.convert(invoice);
+
+                return res;
             }
 
-            invoice.setSeller(sellerRepository.findById(invoiceReq.getSellerId()).get());
-
-            invoice.setShopper(shopperRepository.findById(invoiceReq.getShopperId()).get());
-
-            invoiceRepository.save(invoice);
-
-            InvoiceRes res = invoiceToRes.convert(invoice);
-
-            return res;
-        }*/
-
-        return null;
+            // return null;
+        }
     }
-}
 
 
 

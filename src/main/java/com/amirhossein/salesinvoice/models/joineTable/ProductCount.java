@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class ProductCount {
 
     @EmbeddedId
-    private ProductCountKey compositeKey;
+    private ProductCountKey id;
 
     @ManyToOne
     @MapsId("invoiceId")
