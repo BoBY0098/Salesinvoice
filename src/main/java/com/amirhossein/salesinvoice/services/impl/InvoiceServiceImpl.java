@@ -59,7 +59,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceRes createInvoice(InvoiceReq invoiceReq) {
-        // check and set invoice number
+       /* // check and set invoice number
         if (invoiceReq.getNumber() == null || invoiceReq.getNumber().equals(""))
             invoiceReq.setNumber(NumberGenerator.getRandomNumberString());
 
@@ -74,7 +74,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoice.setDate(invoiceReq.getDate());
             invoice.setInvoiceNum();
 
-            /*if (invoiceReq.getProductId() != null) {
+            *//*if (invoiceReq.getProductId() != null) {
                 invoice.getCounts().add(invoiceReq.getCounts().get()).get();
 
             } else {
@@ -82,7 +82,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     invoice.getProducts().add(productRepository.save(reqToProduct.convert(invoiceReq.getProductReqs().get(i))));
 
                 }
-            }*/
+            }*//*
 
             for (int i = 0; i < invoiceReq.getProductReqs().size(); i++) {
                 if (invoiceReq.getProductId() != null) {
@@ -130,7 +130,10 @@ public class InvoiceServiceImpl implements InvoiceService {
             }
 
             // return null;
-        }
+        }*/
+
+        return null;
+    }
     }
 
 

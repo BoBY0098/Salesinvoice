@@ -32,19 +32,19 @@ public class UserController {
     }
 
     @GetMapping()
-    @ApiOperation(value = "Get All Users" , notes = "Get All Users" , response = UserRes.class , responseContainer = "List" , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Get All Users" , notes = "Get All Users" , response = UserRes.class , responseContainer = "List")
     public List<UserRes> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userId}")
-    @ApiOperation(value = "Get a User" , notes = "Get a User by UserID" , response = UserRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Get a User" , notes = "Get a User by UserID" , response = UserRes.class)
     public UserRes getUserById(@PathVariable UUID userId){
         return userService.getUserById(userId);
     }
 
     @PostMapping("/register")
-    @ApiOperation(value = "Create a New User" , notes = "Create a New User" , response = UserRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Create a New User" , notes = "Create a New User" , response = UserRes.class)
     public UserRes createUser(@RequestBody UserReq req){
         return userService.createUser(req);
     }

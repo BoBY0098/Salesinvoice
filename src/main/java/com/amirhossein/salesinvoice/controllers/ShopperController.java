@@ -27,19 +27,19 @@ public class ShopperController {
     }
 
     @GetMapping()
-    @ApiOperation(value = "Read all Shoppers" , notes = "Read all Shoppers" , response = ShopperRes.class , responseContainer = "List" , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Read all Shoppers" , notes = "Read all Shoppers" , response = ShopperRes.class , responseContainer = "List")
     public List<ShopperRes> getAll(){
         return shopperService.getAll();
     }
 
     @GetMapping("/{shopperId}")
-    @ApiOperation(value = "Read a Shoppers" , notes = "Read a Seller by shopperId" , response = ShopperRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Read a Shoppers" , notes = "Read a Seller by shopperId" , response = ShopperRes.class)
     public ShopperRes getById(@PathVariable UUID shopperId){
         return shopperService.getById(shopperId);
     }
 
     @PostMapping
-    @ApiOperation(value = "Create new Shopper" , notes = "Create new Shopper" , response = ShopperRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Create new Shopper" , notes = "Create new Shopper" , response = ShopperRes.class)
     public ShopperRes createSeller(@RequestBody ShopperReq shopperReq){
         return shopperService.createSeller(shopperReq);
     }

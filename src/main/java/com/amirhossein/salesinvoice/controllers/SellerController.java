@@ -25,19 +25,19 @@ public class SellerController {
     }
 
     @GetMapping()
-    @ApiOperation(value = "Read all Sellers" , notes = "Read all Sellers" , response = SellerRes.class , responseContainer = "List" , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Read all Sellers" , notes = "Read all Sellers" , response = SellerRes.class , responseContainer = "List")
     public List<SellerRes> getAll(){
         return sellerService.getAll();
     }
 
     @GetMapping("/{sellerId}")
-    @ApiOperation(value = "Read a Seller" , notes = "Read a Seller by sellerId" , response = SellerRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Read a Seller" , notes = "Read a Seller by sellerId" , response = SellerRes.class)
     public SellerRes getById(@PathVariable UUID sellerId){
         return sellerService.getById(sellerId);
     }
 
     @PostMapping
-    @ApiOperation(value = "Create new Seller" , notes = "Create new Seller" , response = SellerRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Create new Seller" , notes = "Create new Seller" , response = SellerRes.class)
     public SellerRes createSeller(@RequestBody SellerReq sellerReq){
         return sellerService.createSeller(sellerReq);
     }

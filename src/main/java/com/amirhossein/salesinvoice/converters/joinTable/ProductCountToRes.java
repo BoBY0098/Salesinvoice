@@ -13,7 +13,7 @@ public class ProductCountToRes implements Converter<ProductCount , ProductCountR
 
         ProductCountRes output = new ProductCountRes();
 
-        output.setCompositeKey(input.getCompositeKey());
+        output.setId(input.getId());
         output.setInvoice(input.getInvoice());
         output.setProduct(input.getProduct());
         output.setCount(input.getCount());

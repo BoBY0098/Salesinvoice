@@ -21,13 +21,13 @@ public class InvoiceController {
     }
 
     @GetMapping()
-    @ApiOperation(value = "Get All Invoices" , notes = "Get All Invoices" , response = InvoiceRes.class , responseContainer = "List" , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Get All Invoices" , notes = "Get All Invoices" , response = InvoiceRes.class , responseContainer = "List")
     public ResponseEntity<?> getAllInvoices(){
         return ResponseEntity.ok(invoiceService.getAllInvoices());
     }
 
     @PostMapping()
-    @ApiOperation(value = "Create New a Invoice" , notes = "If you want to Generate Random Number for InvoiceNum , Please Select True for generateNum and Type in box 6 Digit Number" , response = InvoiceRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Create New a Invoice" , notes = "If you want to Generate Random Number for InvoiceNum , Please Select True for generateNum and Type in box 6 Digit Number" , response = InvoiceRes.class)
     public ResponseEntity<?> createInvoice(@RequestBody InvoiceReq invoiceReq){
         return ResponseEntity.ok(invoiceService.createInvoice(invoiceReq));
     }

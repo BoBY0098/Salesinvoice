@@ -25,19 +25,19 @@ public class ProductController {
     }
 
     @GetMapping()
-    @ApiOperation(value = "Get all Products" , notes = "Get all Products" , response = ProductRes.class ,responseContainer = "List" , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Get all Products" , notes = "Get all Products" , response = ProductRes.class ,responseContainer = "List")
     public List<ProductRes> getAllProducts(){
         return productService.getAllProducts();
     }
 
     @GetMapping("/{productId}")
-    @ApiOperation(value = "Get a Product" , notes = "Get a Product by ProductID" , response = ProductRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Get a Product" , notes = "Get a Product by ProductID" , response = ProductRes.class)
     public ProductRes getProductById(@PathVariable UUID productId){
         return productService.getProductById(productId);
     }
 
     @PostMapping()
-    @ApiOperation(value = "Create a New Product" , notes = "Create a New Product" , response = ProductRes.class , authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "Create a New Product" , notes = "Create a New Product" , response = ProductRes.class)
     public ProductRes createProduct(@RequestBody ProductReq productReq){
         return productService.createProduct(productReq);
     }

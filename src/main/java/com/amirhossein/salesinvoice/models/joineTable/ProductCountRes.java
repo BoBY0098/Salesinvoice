@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ProductCountRes {
 
-    ProductCountKey compositeKey;
+    ProductCountKey id;
 
     Invoice invoice;
 

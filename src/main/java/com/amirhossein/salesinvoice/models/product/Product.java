@@ -6,6 +6,7 @@ import com.amirhossein.salesinvoice.models.joineTable.ProductCount;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,5 +19,5 @@ public class Product extends AuditModel {
     private Long price;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductCount> counts;
+    private List<ProductCount> counts = new ArrayList<>();
 }

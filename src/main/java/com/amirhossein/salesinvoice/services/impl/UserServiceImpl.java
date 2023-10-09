@@ -7,11 +7,8 @@ import com.amirhossein.salesinvoice.models.user.User;
 import com.amirhossein.salesinvoice.models.user.UserReq;
 import com.amirhossein.salesinvoice.models.user.UserRes;
 import com.amirhossein.salesinvoice.repositories.UserRepository;
-import com.amirhossein.salesinvoice.services.UserDetailService;
 import com.amirhossein.salesinvoice.services.service.UserService;
-import com.amirhossein.salesinvoice.utils.JwtUtility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,14 +19,12 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final JwtUtility jwtUtility;
     private UserRepository userRepository;
     private UserToRes userToRes;
     private ReqToUser reqToUser;
 
     @Autowired
-    public UserServiceImpl(JwtUtility jwtUtility, UserRepository userRepository, UserToRes userToRes, ReqToUser reqToUser) {
-        this.jwtUtility = jwtUtility;
+    public UserServiceImpl(UserRepository userRepository, UserToRes userToRes, ReqToUser reqToUser) {
         this.userRepository = userRepository;
         this.userToRes = userToRes;
         this.reqToUser = reqToUser;
@@ -75,12 +70,12 @@ public class UserServiceImpl implements UserService {
 
         if (user.isPresent()){
 
-            UserDetails userDetails = new UserDetailService().loadUserByUsername(username);
+//            UserDetails userDetails = new UserDetailService().loadUserByUsername(username);
 
             UserRes userRes = userToRes.convert(user.get());
 
-            userRes.setToken(jwtUtility.generateToken(userDetails));
-            userRes.setRefreshToken(jwtUtility.generateRefreshToken(userDetails));
+            /*userRes.setToken(jwtUtility.generateToken(userDetails));
+            userRes.setRefreshToken(jwtUtility.generateRefreshToken(userDetails));*/
 
             return userRes;
 
